@@ -1,3 +1,9 @@
+import logfire
+from pydantic import BaseModel
+
+logfire.configure(project_name='ezzat-tech/starter-project')
+logfire.instrument_pydantic()
+
 import streamlit as st
 import asyncio
 from agent import research_agent

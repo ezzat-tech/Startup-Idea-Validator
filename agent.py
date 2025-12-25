@@ -1,13 +1,11 @@
+import logfire
 from pydantic_ai import Agent, RunContext
 from models import VentureReport
 from tools import search_perplexity, crawl_website
 import os
+import asyncio
 
-# Define the Agent
-# We tell it:
-# 1. Which model to use
-# 2. What the output should be
-
+# Define the Agent FIRST
 research_agent = Agent(
     'openai:gpt-4o',
     output_type=VentureReport,
@@ -18,16 +16,16 @@ research_agent = Agent(
     )
 )
 
+# Now define the tools using the agent with logfire spans for readability
 @research_agent.tool
 def search_tool(ctx: RunContext, query: str) -> str:
-    return search_perplexity(query)
+    with logfire.span("🔎 Perplexity Search: {query}", query=query):
+        return search_perplexity(query)
 
 @research_agent.tool
 def crawl_tool(ctx: RunContext, url: str) -> str:
-    """Crawl a specific website for more detail."""
-    return crawl_website(url)
-
-import asyncio
+    with logfire.span("🌐 Crawling Website: {url}", url=url):
+        return crawl_website(url)
 
 async def main():
     # Define a sample Lookup
@@ -44,5 +42,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-    
