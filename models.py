@@ -19,4 +19,16 @@ class VentureReport(BaseModel):
     competitors: List[Competitor] = Field(description="List of top 3-5 competitors")
     market_gaps: List[MarketGap] = Field(description="Opportunities identified during research")
     final_recommendation: str = Field(description="Should the founder proceed? Pivot? How to win?")
-    
+
+class Critique(BaseModel):
+    """Structured feedback from the Critic agent."""
+    has_issues: bool = Field(description="True if the report needs improvement")
+    missing_competitor_info: List[str] = Field(
+        description="List of competitors that are missing pricing, strengths, or weaknesses"
+    )
+    vague_market_gaps: List[str] = Field(
+        description="List of market gap titles that lack concrete evidence"
+    )
+    actionable_feedback: str = Field(
+        description="Specific instructions for the Researcher to improve the report"
+    )

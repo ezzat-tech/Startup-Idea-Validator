@@ -6,7 +6,7 @@ logfire.instrument_pydantic()
 
 import streamlit as st
 import asyncio
-from agent import research_agent
+from agent import run_orchestrated_research
 from models import VentureReport
 
 # --- Page Config ---
@@ -59,12 +59,11 @@ if st.button("Run Research Report"):
     else:
         with st.spinner("🔍 Scouting the market, analyzing competitors, and finding gaps..."):
             try:
-                # Run the agent asynchronously
+                # Run the orchestrated multi-agent workflow
                 async def run_research():
-                    return await research_agent.run(startup_input)
+                    return await run_orchestrated_research(startup_input)
 
-                result = asyncio.run(run_research())
-                report: VentureReport = result.output
+                report = asyncio.run(run_research())
 
                 # --- Display Results ---
                 st.success("✅ Research Complete!")
