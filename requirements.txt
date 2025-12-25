@@ -1,0 +1,6 @@
+pydantic-ai
+tavily-python
+streamlit
+python-dotenv
+openai
+logfire
