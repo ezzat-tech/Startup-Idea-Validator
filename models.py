@@ -32,3 +32,21 @@ class Critique(BaseModel):
     actionable_feedback: str = Field(
         description="Specific instructions for the Researcher to improve the report"
     )
+
+class EvalResult(BaseModel):
+    """Structured grading from the judge agent."""
+    competitors_quality_score: int = Field(
+        description="1-10 score: Are competitors well-researched with pricing, strengths, and weaknesses?"
+    )
+    market_gaps_quality_score: int = Field(
+        description="1-10 score: Are market gaps specific and actionable, not vague?"
+    )
+    evidence_score: int = Field(
+        description="1-10 score: Is the report backed by real data and sources, not opinions?"
+    )
+    overall_score: int = Field(
+        description="1-10 overall quality score for the entire report?"
+    )
+    reasoning: str = Field(
+        description="Brief explanation justifying the scores"
+    )
