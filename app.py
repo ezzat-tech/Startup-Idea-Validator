@@ -1,8 +1,11 @@
 import logfire
 from pydantic import BaseModel
 
-logfire.configure(project_name='ezzat-tech/starter-project')
-logfire.instrument_pydantic()
+try:
+    logfire.configure(project_name='ezzat-tech/starter-project')
+    logfire.instrument_pydantic()
+except Exception:
+    pass  # Skip logfire on Streamlit Cloud where auth isn't available
 
 import streamlit as st
 import asyncio
