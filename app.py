@@ -14,7 +14,7 @@ from models import VentureReport
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="AI Market Researcher",
+    page_title="Start-up Idea Validator",
     page_icon="🚀",
     layout="centered"
 )
@@ -44,7 +44,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- App Header ---
-st.title("🚀 AI Market Researcher")
+st.title("🚀 Start-up Idea Validator")
 st.markdown("Enter your startup idea below, and our AI scout will validate the market for you.")
 
 
@@ -112,4 +112,4 @@ if st.button("Run Research Report"):
 
 # --- Footer ---
 st.divider()
-st.caption("AI Market Researcher v1.0 | Data powered by Perplexity AI")
+st.caption("Start-up Idea Validator v1.0 | Data powered by Perplexity AI")
